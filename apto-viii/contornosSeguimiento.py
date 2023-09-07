@@ -32,19 +32,15 @@ while True:
         mask, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
-        area = cv.contourArea(contour)
-        if (area > 500):
-            rect = cv.minAreaRect(contour)
-            box = cv.boxPoints(rect)
-            box = np.int0(box)
-            cv.drawContours(img, [box], 0, (255, 0, 0), -1)
+        x1, y1, w1, h1 = cv.boundingRect(contour)
+        if (w1 > 70 and h1 > 70):
+            cv.rectangle(img, (x1, y1), (x1+w1, y1+h1), (255, 0, 0), -1)
 
             # Detectar colisión con el objeto azul
-            if (rect[0][0] - rect[1][0]/2 < x + ancho and rect[0][0] + rect[1][0]/2 > x and rect[0][1] - rect[1][1]/2 < y + alto and rect[0][1] + rect[1][1]/2 > y):
+            if (x1 < x + ancho and x1 + w1 > x and y1 < y + alto and y1 + h1 > y):
                 direccionX = -direccionX
                 direccionY = -direccionY
                 contador += 1
-                print("Colisión")
 
     x += direccionX
     y += direccionY
@@ -60,15 +56,21 @@ while True:
     # Voltear la imagen horizontalmente
     img = cv.flip(img, 1)
 
-    cv.circle(img, (x, y), 50, color, -1)
+    cv.circle(img, (x, y), 30, color, -1)
 
     cv.putText(img, f"Puntos: {contador}", (10, 30),
                cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
     cv.imshow('Seguimiento de color', img)
 
-    if cv.waitKey(1) & 0xFF == ord('s'):
+    key = cv.waitKey(1)
+    if key == ord('s'):
         break
+    elif key == ord('r'):
+        contador = 0
+        x = 100
+        y = 200
+
 
 cap.release()
 cv.destroyAllWindows()
