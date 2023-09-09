@@ -11,9 +11,8 @@ class player:
         self.upper_color = np.array([125, 255, 255])
 
     def detectarColision(self, comida1, x1, y1, w1, h1):
-        if (x1 > comida1.x + comida1.w
-            and x1 + w1 < comida1.x
-                and y1 > comida1.y + comida1.h and y1+h1 < comida1.y):
+        x2, y2, w2, h2 = comida1.x, comida1.y, comida1.w, comida1.h
+        if (x1 < x2 + w2 and x1 + w1 > x2 and y1 < y2 + h2 and y1 + h1 > y2):
             return True
         else:
             return False
