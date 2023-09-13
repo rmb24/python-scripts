@@ -10,7 +10,6 @@ class food:
         self.w = w
         self.h = h
         self.vel_y = r.randint(1, 5)
-        self.vel_y = 1
 
     def mover(self):
         self.y += self.vel_y

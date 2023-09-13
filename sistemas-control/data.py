@@ -3,6 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix
+from sklearn import metrics
+from sklearn.metrics import ConfusionMatrixDisplay
+
 # Importar la base de datos featuredata
 archivo = "caracteristicas/featuredata.xlsx"
 base_datos = pd.read_excel(archivo)
@@ -44,3 +48,25 @@ knn.fit(X_train, Y_train)
 # Predecir los valores de test
 prediccion = knn.predict(X_text)
 print(prediccion, '\n')
+
+# Evaluar el modelo
+isCorrect = prediccion == base_datos2['Character']
+print(isCorrect, '\n')
+
+# Imprimir la precisión del modelo
+print("Precisión del modelo de entrenamiento: {:.2f}".format(
+    knn.score(X_train, Y_train)))
+print("Precisión del conjunto de evaluación {:.2f}".format(
+    knn.score(X_text, Y_text)))
+
+print(confusion_matrix(Y_text, prediccion), '\n')
+
+confusion_matrix = metrics.confusion_matrix(Y_text, prediccion)
+cm_display = ConfusionMatrixDisplay(
+    confusion_matrix=confusion_matrix, display_labels=['J', 'M', 'V'])
+
+cm_display.plot()
+plt.show()
+
+# Generar un reporte de clasiicación
+print(metrics.classification_report(Y_text, prediccion))
