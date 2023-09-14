@@ -1,7 +1,11 @@
 import numpy as np
+import food as fd
+import random as r
+import game as v
 
 
 class player:
+
     color = (255, 0, 0)
 
     def __init__(self, cv):
@@ -9,12 +13,21 @@ class player:
         self.lower_color = np.array([100, 100, 20])
         self.upper_color = np.array([125, 255, 255])
 
-    def detectarColision(self, comida, x1, y1, w1, h1):
-        x2, y2, w2, h2 = comida.x, comida.y, comida.w, comida.h
+    def detectarColision(self, comida1, x1, y1, w1, h1):
+        x2, y2, w2, h2 = comida1.x, comida1.y, comida1.w, comida1.h
         if (x1 < x2 + w2 and x1 + w1 > x2 and y1 < y2 + h2 and y1 + h1 > y2):
             return True
         else:
             return False
+
+    def comer(self, comidas, comida)
+        comidas.remove(comida)
+
+    def generarComida(self, comidas):
+        comida_w = r.randint(20, 60)
+        comida_x = r.randint(0, v.ancho_pantalla - comida_w)
+        comida = fd.food(comida_x, 0, comida_w, 60)
+        comidas.append(comida)
 
     def dibujar(self, img, comidas):
         hsv = self.cv.cvtColor(img, self.cv.COLOR_BGR2HSV)
@@ -32,4 +45,5 @@ class player:
                 for comida in comidas:
                     choque = self.detectarColision(comida, x1, y1, w1, h1)
                     if (choque):
-                        comidas.remove(comida)
+                        comer(comidas, comida)
+                        generarComida(comidas)

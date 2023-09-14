@@ -31,7 +31,7 @@ def cerrarTodo():
 #     200, 0, 60, 60), fd.food(300, 0, 60, 60), fd.food(400, 0, 60, 60)]
 
 comidas = []
-num_comidas = 10
+num_comidas = 5
 comida_w = 60
 comida_h = 60
 comida_x = 20

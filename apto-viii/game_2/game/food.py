@@ -2,13 +2,14 @@ import random as r
 
 
 class food:
-    def __init__(self, x, y, w, h, color=(0, 0, 255)):
+    color = (0, 0, 255)
+
+    def __init__(self, x, y, w, h):
         self.x = x
         self.y = y
         self.w = w
         self.h = h
-        self.vel_y = r.randint(1, 5)
-        self.color = color
+        self.vel_y = r.randint(1, 1)
 
     def mover(self):
         self.y += self.vel_y
