@@ -28,14 +28,15 @@ def cerrarTodo():
     cv.waitKey(1)
 
 
-comida1 = fd.food(20, 0, 60, 60)
-comida2 = fd.food(100, 0, 60, 60)
+comida1 = fd.food(20, 30, 60, 60)
+comida2 = fd.food(100, 30, 60, 60)
 comidas.append(comida1)
 comidas.append(comida2)
-jugador = p.player(cv)
+jugador = p.player(cv, ancho_pantalla)
 
 while True:
     frame = capturaVideo(cap)
+    frame = cv.flip(frame, 1)
     for comida in comidas:
         comida.mover()
         comida.dibujar(cv, frame)

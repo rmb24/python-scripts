@@ -1,15 +1,15 @@
 import numpy as np
 import food as fd
 import random as r
-import game as v
 
 
 class player:
-
+    puntos = 10
     color = (255, 0, 0)
 
-    def __init__(self, cv):
+    def __init__(self, cv, ancho_v):
         self.cv = cv
+        self.ancho_v = ancho_v
         self.lower_color = np.array([100, 100, 20])
         self.upper_color = np.array([125, 255, 255])
 
@@ -20,13 +20,14 @@ class player:
         else:
             return False
 
-    def comer(self, comidas, comida)
+    def comer(self, comidas, comida):
+        self.puntos += comida.puntos
         comidas.remove(comida)
 
     def generarComida(self, comidas):
         comida_w = r.randint(20, 60)
-        comida_x = r.randint(0, v.ancho_pantalla - comida_w)
-        comida = fd.food(comida_x, 0, comida_w, 60)
+        comida_x = r.randint(0, self.ancho_v - comida_w)
+        comida = fd.food(comida_x, 30, comida_w, 60)
         comidas.append(comida)
 
     def dibujar(self, img, comidas):
@@ -45,5 +46,8 @@ class player:
                 for comida in comidas:
                     choque = self.detectarColision(comida, x1, y1, w1, h1)
                     if (choque):
-                        comer(comidas, comida)
-                        generarComida(comidas)
+                        self.comer(comidas, comida)
+                        self.generarComida(comidas)
+
+        self.cv.putText(img, "Jugador 1: "+str(self.puntos), (10, 30),
+                        self.cv.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
