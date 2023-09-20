@@ -7,9 +7,10 @@ class player:
     puntos = 10
     color = (255, 0, 0)
 
-    def __init__(self, cv, ancho_v):
+    def __init__(self, cv, ancho_v, alto_v):
         self.cv = cv
         self.ancho_v = ancho_v
+        self.alto_v = alto_v
         self.lower_color = np.array([100, 100, 20])
         self.upper_color = np.array([125, 255, 255])
 
@@ -30,6 +31,10 @@ class player:
         comida = fd.food(comida_x, 30, comida_w, 60)
         comidas.append(comida)
 
+    def restarPuntos(self, comida):
+        if comida.y > self.alto_v:
+            self.puntos -= comida.puntos
+
     def dibujar(self, img, comidas):
         hsv = self.cv.cvtColor(img, self.cv.COLOR_BGR2HSV)
         mask = self.cv.inRange(hsv, self.lower_color, self.upper_color)
@@ -48,6 +53,8 @@ class player:
                     if (choque):
                         self.comer(comidas, comida)
                         self.generarComida(comidas)
+                    elif (not choque):
+                        self.restarPuntos(comida)
 
         self.cv.putText(img, "Jugador 1: "+str(self.puntos), (10, 30),
                         self.cv.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)

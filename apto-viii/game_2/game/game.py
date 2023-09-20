@@ -32,7 +32,7 @@ comida1 = fd.food(20, 30, 60, 60)
 comida2 = fd.food(100, 30, 60, 60)
 comidas.append(comida1)
 comidas.append(comida2)
-jugador = p.player(cv, ancho_pantalla)
+jugador = p.player(cv, ancho_pantalla, alto_pantalla)
 
 while True:
     frame = capturaVideo(cap)
