@@ -13,13 +13,13 @@ class player:
         self.jugador_num = jugador_num
         self.puntos = 10
         if self.jugador_num == 1:
-            self.color = (0, 255, 0)
-            self.lower_color = np.array([50, 100, 20])
-            self.upper_color = np.array([70, 255, 255])
-        else:
             self.color = (255, 0, 0)
             self.lower_color = np.array([100, 100, 20])
             self.upper_color = np.array([125, 255, 255])
+        elif self.jugador_num == 2:
+            self.color = (0, 0, 255)
+            self.lower_color = np.array([0, 100, 20])
+            self.upper_color = np.array([10, 255, 255])
 
     def detectarColision(self, comida1, x1, y1, w1, h1):
         x2, y2, w2, h2 = comida1.x, comida1.y, comida1.w, comida1.h

@@ -3,6 +3,13 @@ import numpy as np
 import food as fd
 import player as p
 import obstacle as ob
+import pygame as pg
+
+pg.mixer.init()
+# pg.mixer.music.load("./music/Pou music ost - Food Drop.mp3")
+pg.mixer.music.load(
+    "./music/Niño Brasileño cantando Pou Version Completa 🐸.mp3")
+pg.mixer.music.play(-1)
 
 cap = cv.VideoCapture(0)
 
@@ -46,6 +53,22 @@ obstaculos.append(obstaculo1)
 obstaculos.append(obstaculo2)
 
 
+def limpiarPantalla():
+    comidas.clear()
+    obstaculos.clear()
+
+
+def reiniciarJuego():
+    jugador1.puntos = 10
+    jugador2.puntos = 10
+    comidas.clear()
+    obstaculos.clear()
+    jugador1.generarComida(comidas)
+    jugador1.generarObstaculos(obstaculos)
+    jugador2.generarComida(comidas)
+    jugador2.generarObstaculos(obstaculos)
+
+
 while True:
     frame = capturaVideo(cap)
     frame = cv.flip(frame, 1)
@@ -66,16 +89,32 @@ while True:
             comida.vel_y = 0
         for obstaculo in obstaculos:
             obstaculo.vel_y = 0
-
-        cv.putText(frame, "Juego terminado", (200, 200),
+        limpiarPantalla()
+        cv.putText(frame, "Juego terminado", (150, 200),
                    cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
         cv.putText(frame, "El ganador es el jugador " + str(
-            1 if jugador1.puntos > 0 else 2), (200, 300), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            1 if jugador1.puntos > 0 else 2), (150, 250), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        pg.mixer.music.pause()
+    elif jugador1.puntos >= 100 or jugador2.puntos >= 100:
+        for comida in comidas:
+            comida.vel_y = 0
+        for obstaculo in obstaculos:
+            obstaculo.vel_y = 0
+        limpiarPantalla()
+        cv.putText(frame, "Juego terminado", (150, 200),
+                   cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+        cv.putText(frame, "El ganador es el jugador " + str(
+            1 if jugador1.puntos > 0 else 2), (150, 250), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        pg.mixer.music.pause()
+    else:
+        pg.mixer.music.unpause()
 
     mostrarImagen(frame)
 
     key = cv.waitKey(1)
     if key == ord('s'):
         break
+    if key == ord('r'):
+        reiniciarJuego()
 
 cerrarTodo()
