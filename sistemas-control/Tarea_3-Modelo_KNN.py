@@ -70,3 +70,19 @@ plt.show()
 
 # Generar un reporte de clasiicación
 print(metrics.classification_report(Y_text, prediccion))
+
+# Grafica de sensibilidad
+
+knn_range = range(1, 20)
+scores = []
+for k in knn_range:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train, Y_train)
+    scores.append(knn.score(X_text, Y_text))
+
+plt.figure()
+plt.xlabel('k')
+plt.ylabel('accuracy')
+plt.scatter(knn_range, scores)
+plt.xticks([0, 5, 10, 15, 20])
+plt.show()

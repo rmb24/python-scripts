@@ -5,13 +5,14 @@ import player as p
 import obstacle as ob
 import pygame as pg
 
-pg.mixer.init()
-# pg.mixer.music.load("./music/Pou music ost - Food Drop.mp3")
-pg.mixer.music.load(
-    "./music/Niño Brasileño cantando Pou Version Completa 🐸.mp3")
-pg.mixer.music.play(-1)
 
 cap = cv.VideoCapture(0)
+
+pg.mixer.init()
+pg.mixer.music.load("./music/Pou music ost - Food Drop.mp3")
+# pg.mixer.music.load(
+#     "./music/Niño Brasileño cantando Pou Version Completa 🐸.mp3")
+pg.mixer.music.play(-1)
 
 ancho_pantalla = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
 alto_pantalla = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))

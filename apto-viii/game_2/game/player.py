@@ -61,7 +61,7 @@ class player:
 
         for contour in contours:
             x1, y1, w1, h1 = self.cv.boundingRect(contour)
-            if w1 > 70 and h1 > 70:
+            if w1 > 100 and h1 > 100:
                 self.cv.rectangle(
                     img, (x1, y1), (x1+w1, y1+h1), self.color, -1)
                 for comida in comidas:
