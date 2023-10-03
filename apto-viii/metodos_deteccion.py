@@ -3,10 +3,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Cargar las imágenes
-img = cv.imread('./images/tigre.jpg', cv.IMREAD_GRAYSCALE)
+img = cv.imread('./images/leon.jpg', cv.IMREAD_GRAYSCALE)
 assert img is not None, "file could not be read, check with os.path.exists()"
 img2 = img.copy()
-template = cv.imread('./images/cara_tigre.jpg', cv.IMREAD_GRAYSCALE)
+template = cv.imread('./images/leon_cara.png', cv.IMREAD_GRAYSCALE)
 assert template is not None, "file could not be read, check with os.path.exists()"
 w, h = template.shape[::-1]
 

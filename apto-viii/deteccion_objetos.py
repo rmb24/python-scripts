@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import cv2 as cv
 
 # Cargar las imágenes
-img = cv.imread('./images/tigre.jpg')
+img = cv.imread('./images/card_diamond.png')
 img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 
-img2 = cv.imread('./images/cara_tigre.jpg')
+img2 = cv.imread('./images/diamond.png')
 img2 = cv.cvtColor(img2, cv.COLOR_BGR2RGB)
 
 # Crear la figura y las subtramas

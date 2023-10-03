@@ -3,10 +3,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Cargar las imágenes
-img_rgb = cv.imread('./images/card.jpg')
+img_rgb = cv.imread('./images/card_diamond.png')
 assert img_rgb is not None, "file could not be read, check with os.path.exists()"
 img_gray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
-template = cv.imread('./images/card_hearth.png', cv.IMREAD_GRAYSCALE)
+template = cv.imread('./images/diamond.png', cv.IMREAD_GRAYSCALE)
 assert template is not None, "file could not be read, check with os.path.exists()"
 
 # Cambiar el tamaño de la imagen de la plantilla si es necesario
